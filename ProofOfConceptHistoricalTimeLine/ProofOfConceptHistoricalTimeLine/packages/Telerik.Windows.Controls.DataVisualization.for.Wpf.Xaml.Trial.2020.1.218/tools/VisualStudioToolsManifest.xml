@@ -1,0 +1,58 @@
+<FileList>
+  <File Reference="Telerik.Windows.Controls.DataVisualization.dll">
+    <ToolboxItems VSCategory="Telerik UI for WPF - Data Visualization 2020 R1 (Nuget)" BlendCategory="Telerik UI for WPF - Data Visualization 2020 R1 (Nuget)">
+      <Item Type="Telerik.Windows.Controls.RadBarcode11" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode128" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode128A" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode128B" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode128C" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode25Interleaved" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode25Standard" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode39" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode39Extended" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode93" />
+      <Item Type="Telerik.Windows.Controls.RadBarcode93Extended" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeCodebar" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeEAN13" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeEAN8" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeMSI" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodePDF417" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodePostnet" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeQR" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeReader" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeUPCA" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeUPCE" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeUPCSupplement2" />
+      <Item Type="Telerik.Windows.Controls.RadBarcodeUPCSupplement5" />
+      <Item Type="Telerik.Windows.Controls.RadHorizontalBulletGraph" />
+      <Item Type="Telerik.Windows.Controls.RadVerticalBulletGraph" />
+      <Item Type="Telerik.Windows.Controls.RadHorizontalDataAxis" />
+      <Item Type="Telerik.Windows.Controls.RadDataBar" />
+      <Item Type="Telerik.Windows.Controls.RadStacked100DataBar" />
+      <Item Type="Telerik.Windows.Controls.RadStackedDataBar" />
+      <Item Type="Telerik.Windows.Controls.RadVerticalDataAxis" />
+      <Item Type="Telerik.Windows.Controls.RadHorizontalLinearGauge" />
+      <Item Type="Telerik.Windows.Controls.RadVerticalLinearGauge" />
+      <Item Type="Telerik.Windows.Controls.RadRadialGauge" />
+      <Item Type="Telerik.Windows.Controls.RadQuadrantNEGauge" />
+      <Item Type="Telerik.Windows.Controls.RadQuadrantNWGauge" />
+      <Item Type="Telerik.Windows.Controls.RadQuadrantSEGauge" />
+      <Item Type="Telerik.Windows.Controls.RadQuadrantSWGauge" />
+      <Item Type="Telerik.Windows.Controls.RadSemicircleEastGauge" />
+      <Item Type="Telerik.Windows.Controls.RadSemicircleNorthGauge" />
+      <Item Type="Telerik.Windows.Controls.RadSemicircleSouthGauge" />
+      <Item Type="Telerik.Windows.Controls.RadSemicircleWestGauge" />
+      <Item Type="Telerik.Windows.Controls.RadHeatMap" />
+      <Item Type="Telerik.Windows.Controls.RadMap" />
+      <Item Type="Telerik.Windows.Controls.RadAreaSparkline" />
+      <Item Type="Telerik.Windows.Controls.RadColumnSparkline" />
+      <Item Type="Telerik.Windows.Controls.RadLinearSparkline" />
+      <Item Type="Telerik.Windows.Controls.RadScatterSparkline" />
+      <Item Type="Telerik.Windows.Controls.RadWinLossSparkline" />
+      <Item Type="Telerik.Windows.Controls.RadTimeBar" />
+      <Item Type="Telerik.Windows.Controls.RadTimeline" />
+      <Item Type="Telerik.Windows.Controls.RadPivotMap" />
+      <Item Type="Telerik.Windows.Controls.RadTreeMap" />
+    </ToolboxItems>
+  </File>
+</FileList>
