@@ -14,7 +14,10 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
         public ObservableCollection<ProductionDuration> ProductionOn { get; set; }
         public ObservableCollection<ProductionDuration> ProductionOff { get; set; }
         public ProductionPeriodDuration Period { get; set; }
-
+        // TEST !!!
+        public ObservableCollection<Item> Data { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public MainWindowViewModel()
         {
@@ -24,6 +27,30 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             ProductionOn = new ObservableCollection<ProductionDuration>(Period.ProductionOn);
             ProductionOff = new ObservableCollection<ProductionDuration>(Period.ProductionOff);
 
+            // TEST !!!
+            var startDate = new DateTime(2010, 1, 1);
+            var endDate = new DateTime(2012, 2, 1);
+
+            var items = new ObservableCollection<Item>();
+            Random r = new Random();
+            for (DateTime i = startDate; i < endDate; i = i.AddMonths(1))
+            {
+                items.Add(new Item() { Date = i, Duration = TimeSpan.FromDays(r.Next(50, 100)), GroupName="Période de production" });
+            }
+
+            for (int i = 0; i < 15; i++)
+            {
+                items.Add(new Item()
+                {
+                    Date = startDate.AddMonths(r.Next(0, 25)).AddDays(15),
+                    GroupName="Période d'arrêt"
+
+                });
+            }
+
+            Data = items;
+            StartDate = startDate;
+            EndDate = endDate;
         }
     }
 }

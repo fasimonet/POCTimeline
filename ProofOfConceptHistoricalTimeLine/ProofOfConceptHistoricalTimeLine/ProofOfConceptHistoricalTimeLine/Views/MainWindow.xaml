@@ -4,6 +4,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:ProofOfConceptHistoricalTimeLine.ViewModels"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Key="ToolTipTemplate">
+            <Grid>
+                <Rectangle Margin="0" RadiusY="2" RadiusX="2" Fill="Wheat" Opacity="0.7"/>
+                <TextBlock FontFamily="Segoe UI" Text="My încredible Tooltip: "/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ItemWithDurationTemplate">
+            <Border Height="10" Margin="0, 0, 0, 5">
+                <Rectangle Height="7" 
+                        VerticalAlignment="Center" 
+                        Fill="Green"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="InstantItemTemplate">
+            <Border Width="10" Height="10" Margin="0,0,0,5">
+                <Rectangle Height="7" 
+                    Width="7" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Fill="Red">
+                </Rectangle>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -59,16 +84,24 @@
 
         <telerik:RadTimeline Grid.Row="3" 
                         Grid.ColumnSpan="2"
-                        PeriodStart="2020/04/08"  
-                        PeriodEnd="2020/04/09"  
+                        PeriodStart="{Binding StartDate, Mode=TwoWay}"  
+                        PeriodEnd="{Binding EndDate, Mode=TwoWay}"  
                         StartPath="Date" 
                         DurationPath="Duration"
-                        ItemsSource="{Binding ProductionOn}">
+                        ToolTipTemplate="{StaticResource ToolTipTemplate}"
+                        TimelineItemTemplate="{StaticResource ItemWithDurationTemplate}"
+                        TimelineInstantItemTemplate="{StaticResource InstantItemTemplate}"
+                        GroupPath="GroupName" 
+                        ItemsSource="{Binding Data}">
             <telerik:RadTimeline.Intervals>
+                <telerik:YearInterval />
                 <telerik:MonthInterval />
                 <telerik:WeekInterval />
                 <telerik:DayInterval />
                 <telerik:HourInterval />
+                <telerik:MinuteInterval />
+                <telerik:SecondInterval />
+                <telerik:MillisecondInterval />
             </telerik:RadTimeline.Intervals>
         </telerik:RadTimeline>
     </Grid>
