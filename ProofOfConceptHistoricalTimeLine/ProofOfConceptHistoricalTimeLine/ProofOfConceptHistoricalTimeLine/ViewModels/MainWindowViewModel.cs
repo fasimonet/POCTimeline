@@ -11,8 +11,10 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public string Message { get; set; }
-        public ObservableCollection<ProductionDuration> ProductionOn { get; set; }
-        public ObservableCollection<ProductionDuration> ProductionOff { get; set; }
+        //public ObservableCollection<ProductionDuration> ProductionOn { get; set; }
+        //public ObservableCollection<ProductionDuration> ProductionOff { get; set; }
+        public ObservableCollection<Item> ProductionOn { get; set; }
+        public ObservableCollection<Item> ProductionOff { get; set; }
         public ProductionPeriodDuration Period { get; set; }
         // TEST !!!
         public ObservableCollection<Item> Data { get; set; }
@@ -24,8 +26,10 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             Message = "salut";
             Period = new ProductionPeriodDuration();
 
-            ProductionOn = new ObservableCollection<ProductionDuration>(Period.ProductionOn);
-            ProductionOff = new ObservableCollection<ProductionDuration>(Period.ProductionOff);
+            //ProductionOn = new ObservableCollection<Item>(Period.ProductionOn);
+            ProductionOn = new ObservableCollection<Item>(Period.ProductionOn);
+            //ProductionOff = new ObservableCollection<Item>(Period.ProductionOff);
+            ProductionOff = new ObservableCollection<Item>();
 
             // TEST !!!
             var startDate = new DateTime(2010, 1, 1);

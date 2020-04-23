@@ -8,7 +8,7 @@
         <DataTemplate x:Key="ToolTipTemplate">
             <Grid>
                 <Rectangle Margin="0" RadiusY="2" RadiusX="2" Fill="Wheat" Opacity="0.7"/>
-                <TextBlock FontFamily="Segoe UI" Text="My încredible Tooltip: "/>
+                <TextBlock FontFamily="Segoe UI" Text="My incredible Tooltip: "/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ItemWithDurationTemplate">
@@ -44,6 +44,15 @@
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
             <Label Content="{Binding Period.TotalPeriod.StartDuration}" ContentStringFormat="Début de la période observée : {0},"  />
             <Label Content="{Binding Period.TotalPeriod.EndDuration}" ContentStringFormat="Fin de la période observée : {0}"  />
+            <!--<telerik:RadTimeSpanPicker>
+                <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                    <telerik:DayTimeSpanComponent/>
+                    <telerik:HourTimeSpanComponent/>
+                    <telerik:MinuteTimeSpanComponent/>
+                    <telerik:SecondTimeSpanComponent/>
+                    <telerik:MillisecondTimeSpanComponent/>
+                </telerik:RadTimeSpanPicker.TimeSpanComponents>
+            </telerik:RadTimeSpanPicker>-->
         </StackPanel>
         
         <TextBlock Grid.Row="1" Text="{Binding ProductionOn.Count, StringFormat='Liste des durées de production ({0}) :'}"/>
@@ -53,11 +62,19 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Date de début"/>
-                            <DatePicker SelectedDate="{Binding StartDuration}"/>
+                            <DatePicker SelectedDate="{Binding Date}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Date de fin"/>
-                            <DatePicker SelectedDate="{Binding EndDuration}"/>
+                            <Label Content="Durée"/>
+                            <telerik:RadTimeSpanPicker Value="{Binding Duration, Mode=TwoWay}">
+                                <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                                    <telerik:DayTimeSpanComponent/>
+                                    <telerik:HourTimeSpanComponent/>
+                                    <telerik:MinuteTimeSpanComponent/>
+                                    <telerik:SecondTimeSpanComponent/>
+                                    <telerik:MillisecondTimeSpanComponent/>
+                                </telerik:RadTimeSpanPicker.TimeSpanComponents>
+                            </telerik:RadTimeSpanPicker>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
