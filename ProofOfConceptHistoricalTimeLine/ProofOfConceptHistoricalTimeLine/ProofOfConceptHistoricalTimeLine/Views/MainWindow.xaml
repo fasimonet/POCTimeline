@@ -54,9 +54,58 @@
                 </telerik:RadTimeSpanPicker.TimeSpanComponents>
             </telerik:RadTimeSpanPicker>-->
         </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="{Binding ProductionOn.Count, StringFormat='Liste des durées de production ({0}) :'}"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Grid.Column="1" Grid.RowSpan="2" Command="{Binding DeleteProductionOnItemCommand}">Supprimer</Button>
+                <Button Grid.Column="1" Grid.RowSpan="2" Command="{Binding AddProductionOnItemCommand}">Ajouter</Button>
+            </StackPanel>
+        </StackPanel>
         
-        <TextBlock Grid.Row="1" Text="{Binding ProductionOn.Count, StringFormat='Liste des durées de production ({0}) :'}"/>
-        <ListView Grid.Row="2" ItemsSource="{Binding ProductionOn}">
+        <ListView Grid.Row="2" ItemsSource="{Binding ProductionOn}" SelectedItem="{Binding ProductionOnSelectedItem}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Label Content="Date de début"/>
+                                <DatePicker SelectedDate="{Binding Date}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <Label Content="Durée (h:m:s,ms)"/>
+                                <telerik:RadTimeSpanPicker Value="{Binding Duration, Mode=TwoWay}">
+                                    <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                                        <telerik:DayTimeSpanComponent/>
+                                        <telerik:HourTimeSpanComponent/>
+                                        <telerik:MinuteTimeSpanComponent/>
+                                        <telerik:SecondTimeSpanComponent/>
+                                        <telerik:MillisecondTimeSpanComponent/>
+                                    </telerik:RadTimeSpanPicker.TimeSpanComponents>
+                                </telerik:RadTimeSpanPicker>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="{Binding ProductionOff.Count, StringFormat='Liste des durées à l arrêt ({0}) :'}"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding DeleteProductionOffItemCommand}">Supprimer</Button>
+                <Button Command="{Binding AddProductionOffItemCommand}">Ajouter</Button>
+            </StackPanel>
+        </StackPanel>
+        <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ProductionOff}" SelectedItem="{Binding ProductionOffSelectedItem, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -65,7 +114,7 @@
                             <DatePicker SelectedDate="{Binding Date}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Durée"/>
+                            <Label Content="Durée (h:m:s,ms)"/>
                             <telerik:RadTimeSpanPicker Value="{Binding Duration, Mode=TwoWay}">
                                 <telerik:RadTimeSpanPicker.TimeSpanComponents>
                                     <telerik:DayTimeSpanComponent/>
@@ -75,24 +124,6 @@
                                     <telerik:MillisecondTimeSpanComponent/>
                                 </telerik:RadTimeSpanPicker.TimeSpanComponents>
                             </telerik:RadTimeSpanPicker>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ProductionOff.Count, StringFormat='Liste des durées à l arrêt ({0}) :'}"/>
-        <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ProductionOff}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Date de début"/>
-                            <DatePicker SelectedDate="{Binding StartDuration}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Date de fin"/>
-                            <DatePicker SelectedDate="{Binding EndDuration}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
@@ -109,16 +140,11 @@
                         TimelineItemTemplate="{StaticResource ItemWithDurationTemplate}"
                         TimelineInstantItemTemplate="{StaticResource InstantItemTemplate}"
                         GroupPath="GroupName" 
-                        ItemsSource="{Binding Data}">
+                        ItemsSource="{Binding Data, Mode=TwoWay}">
             <telerik:RadTimeline.Intervals>
-                <telerik:YearInterval />
-                <telerik:MonthInterval />
-                <telerik:WeekInterval />
                 <telerik:DayInterval />
                 <telerik:HourInterval />
                 <telerik:MinuteInterval />
-                <telerik:SecondInterval />
-                <telerik:MillisecondInterval />
             </telerik:RadTimeline.Intervals>
         </telerik:RadTimeline>
     </Grid>
