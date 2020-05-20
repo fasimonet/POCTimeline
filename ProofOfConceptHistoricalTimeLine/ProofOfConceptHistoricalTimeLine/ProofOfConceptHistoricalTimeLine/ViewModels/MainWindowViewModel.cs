@@ -122,6 +122,9 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             EndDate = endDate;*/
         }
 
+        /*
+         *
+         */
         private void DeleteProductionOnItem(object o)
         {
             if(ProductionOn.Count != 0 && ProductionOnSelectedItem != null)
