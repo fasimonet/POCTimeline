@@ -3,6 +3,7 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:ProofOfConceptHistoricalTimeLine.ViewModels"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <DataTemplate x:Key="ToolTipTemplate">
@@ -78,7 +79,7 @@
                             
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                 <Label Content="Date de début"/>
-                                <DatePicker SelectedDate="{Binding Date}"/>
+                                <telerik:RadDateTimePicker SelectedDate="{Binding Date}"/>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <Label Content="Durée (h:m:s,ms)"/>
@@ -110,12 +111,27 @@
                 <DataTemplate>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Date de début"/>
-                            <DatePicker SelectedDate="{Binding Date}"/>
+                            <!--<Label Content="Date de début"/>
+                            <DatePicker SelectedDate="{Binding Date}"/>-->
+                            <Label Content="Heure de début" />
+                            <telerik:RadTimeSpanPicker Value="{Binding Date.TimeOfDay}">
+                                <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                                    <telerik:DayTimeSpanComponent/>
+                                    <telerik:HourTimeSpanComponent/>
+                                    <telerik:MinuteTimeSpanComponent/>
+                                    <telerik:SecondTimeSpanComponent/>
+                                    <telerik:MillisecondTimeSpanComponent/>
+                                </telerik:RadTimeSpanPicker.TimeSpanComponents>
+                            </telerik:RadTimeSpanPicker> 
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Durée (h:m:s,ms)"/>
+                            <Label Content="Durée (j:h:m:s,ms)"/>
                             <telerik:RadTimeSpanPicker Value="{Binding Duration, Mode=TwoWay}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="ValueChanged">
+                                        <i:InvokeCommandAction Command="{Binding OnValueChangedCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <telerik:RadTimeSpanPicker.TimeSpanComponents>
                                     <telerik:DayTimeSpanComponent/>
                                     <telerik:HourTimeSpanComponent/>
@@ -136,11 +152,11 @@
                         PeriodEnd="{Binding EndDate, Mode=TwoWay}"  
                         StartPath="Date" 
                         DurationPath="Duration"
+                        ItemsSource="{Binding Data, Mode=TwoWay}"
                         ToolTipTemplate="{StaticResource ToolTipTemplate}"
                         TimelineItemTemplate="{StaticResource ItemWithDurationTemplate}"
                         TimelineInstantItemTemplate="{StaticResource InstantItemTemplate}"
-                        GroupPath="GroupName" 
-                        ItemsSource="{Binding Data, Mode=TwoWay}">
+                        GroupPath="GroupName">
             <telerik:RadTimeline.Intervals>
                 <telerik:DayInterval />
                 <telerik:HourInterval />

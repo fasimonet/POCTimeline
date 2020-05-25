@@ -13,9 +13,22 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public string Message { get; set; }
-        //public ObservableCollection<ProductionDuration> ProductionOn { get; set; }
-        //public ObservableCollection<ProductionDuration> ProductionOff { get; set; }
-        public ObservableCollection<Item> ProductionOn { get; set; }
+
+        private ObservableCollection<Item> _productionOn;
+        public ObservableCollection<Item> ProductionOn
+        {
+            get
+            {
+                return _productionOn;
+            }
+
+            set
+            {
+                _productionOn = value;
+                OnPropertyChanged(nameof(ProductionOn));
+                UpdateTimeline();
+            }
+        }
         public ObservableCollection<Item> ProductionOff { get; set; }
         public ProductionPeriodDuration Period { get; set; }
 
@@ -29,8 +42,24 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             set
             {
                 _productionOnSelectedItem = value;
+                ProductionOnSelectedItemTimeOfDay = _productionOnSelectedItem.Date.TimeOfDay;
                 OnPropertyChanged(nameof(ProductionOnSelectedItem));
+                UpdateTimeline();
             }
+        }
+
+        private TimeSpan _productionOnSelectedItemTimeOfDay;
+        public TimeSpan ProductionOnSelectedItemTimeOfDay 
+        { 
+            get
+            {
+                return _productionOnSelectedItemTimeOfDay;
+            }
+            set
+            {
+                _productionOnSelectedItemTimeOfDay = value;
+                OnPropertyChanged(nameof(ProductionOnSelectedItemTimeOfDay));
+            } 
         }
 
         private Item _productionOffSelectedItem;
@@ -43,7 +72,23 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             set
             {
                 _productionOffSelectedItem = value;
+                ProductionOffSelectedItemTimeOfDay = _productionOffSelectedItem.Date.TimeOfDay;
                 OnPropertyChanged(nameof(ProductionOffSelectedItem));
+                UpdateTimeline();
+            }
+        }
+
+        private TimeSpan _productionOffSelectedItemTimeOfDay;
+        public TimeSpan ProductionOffSelectedItemTimeOfDay 
+        {
+            get
+            {
+                return _productionOffSelectedItemTimeOfDay;
+            }
+            set
+            {
+                _productionOffSelectedItemTimeOfDay = value;
+                OnPropertyChanged(nameof(ProductionOffSelectedItemTimeOfDay));
             }
         }
 
@@ -51,7 +96,18 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             return false;
         }*/
         // TEST !!!
-        public ObservableCollection<Item> Data { get; set; }
+        private ObservableCollection<Item> _data;
+        public ObservableCollection<Item> Data { 
+            get
+            {
+                return _data;
+            }
+            set 
+            {
+                _data = value;
+                OnPropertyChanged(nameof(Data));
+            }
+        }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
@@ -59,21 +115,7 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
         public SimpleCommand AddProductionOnItemCommand { get; set; }
         public SimpleCommand DeleteProductionOffItemCommand { get; set; }
         public SimpleCommand AddProductionOffItemCommand { get; set; }
-
-        private ObservableCollection<Item> _timelineItems;
-        public ObservableCollection<Item> TimelineItems
-        {
-            get
-            {
-                return _timelineItems;
-            }
-            set
-            {
-                _timelineItems = value;
-                OnPropertyChanged(nameof(TimelineItems));
-            }
-        }
-
+        public SimpleCommand OnValueChangedCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -86,10 +128,9 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             AddProductionOnItemCommand = new SimpleCommand(AddProductionOnItem);
             DeleteProductionOffItemCommand = new SimpleCommand(DeleteProductionOffItem);
             AddProductionOffItemCommand = new SimpleCommand(AddProductionOffItem);
+            OnValueChangedCommand = new SimpleCommand(OnDurationChanged);
 
-            //ProductionOn = new ObservableCollection<Item>(Period.ProductionOn);
             ProductionOn = new ObservableCollection<Item>(Period.ProductionOn);
-            //ProductionOff = new ObservableCollection<Item>(Period.ProductionOff);
             ProductionOff = new ObservableCollection<Item>(Period.ProductionOff);
 
             UpdateTimeline();
@@ -122,9 +163,6 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
             EndDate = endDate;*/
         }
 
-        /*
-         *
-         */
         private void DeleteProductionOnItem(object o)
         {
             if(ProductionOn.Count != 0 && ProductionOnSelectedItem != null)
@@ -151,30 +189,39 @@ namespace ProofOfConceptHistoricalTimeLine.ViewModels
 
         private void AddProductionOffItem(object o)
         {
-            ProductionOff.Add(new Item { Date = DateTime.Now, Duration = new TimeSpan(1, 0, 0), GroupName = "Période de production" });
+            ProductionOff.Add(new Item { Date = DateTime.Now, Duration = new TimeSpan(1, 0, 0), GroupName = "Période d'arrêt" });
             UpdateTimeline();
         }
 
         private void UpdateTimeline()
         {
-            /*var items = new ObservableCollection<Item>(ProductionOn);
-            foreach (var elt in ProductionOff)
+            if(ProductionOn != null && ProductionOff != null)
             {
-                items.Add(elt);
-            }
+                /*var items = new ObservableCollection<Item>(ProductionOn);
+                foreach (var elt in ProductionOff)
+                {
+                    items.Add(elt);
+                }
 
-            Data = items;
-            StartDate = Period.TotalPeriod.StartDuration;
-            EndDate = Period.TotalPeriod.EndDuration;*/
-            Data = new ObservableCollection<Item>(ProductionOn);
-            foreach (var elt in ProductionOff)
-            {
-                Data.Add(elt);
-            }
+                Data = items;
+                StartDate = Period.TotalPeriod.StartDuration;
+                EndDate = Period.TotalPeriod.EndDuration;*/
+                Data = new ObservableCollection<Item>(ProductionOn);
+                foreach (var elt in ProductionOff)
+                {
+                    Data.Add(elt);
+                }
 
-            //Data = TimelineItems;
-            StartDate = Period.TotalPeriod.StartDuration;
-            EndDate = Period.TotalPeriod.EndDuration;
+                //Data = TimelineItems;
+                StartDate = Period.TotalPeriod.StartDuration;
+                EndDate = Period.TotalPeriod.EndDuration;
+            }
+            
+        }
+
+        private void OnDurationChanged(object o)
+        {
+            UpdateTimeline();
         }
     }
 }

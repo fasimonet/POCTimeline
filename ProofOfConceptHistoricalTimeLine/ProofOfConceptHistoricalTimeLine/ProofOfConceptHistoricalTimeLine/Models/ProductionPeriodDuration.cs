@@ -10,8 +10,6 @@ namespace ProofOfConceptHistoricalTimeLine.Models
     {
         #region Properties
         public ProductionDuration TotalPeriod { get; set; } 
-        //public List<ProductionDuration> ProductionOn { get; set; }
-        //public List<ProductionDuration> ProductionOff { get; set; }
         public List<Item> ProductionOn { get; set; }
         public List<Item> ProductionOff { get; set; }
         #endregion
@@ -27,7 +25,8 @@ namespace ProofOfConceptHistoricalTimeLine.Models
             ProductionOn = new List<Item>();
             ProductionOff = new List<Item>();
             ProductionOn.Add(new Item() { Date = now, Duration = new TimeSpan(1, 0, 0), GroupName="Période de production" });
-            ProductionOff.Add(new Item() { Date = now.AddHours(1), Duration = new TimeSpan(0, 20, 0), GroupName="Période d'arrêt" });
+            //ProductionOn.FirstOrDefault().Date.TimeOfDay = new TimeSpan(10, 0, 0);
+            ProductionOff.Add(new Item() { Date = now.AddHours(1), Duration = new TimeSpan(0, 20, 0), GroupName ="Période d'arrêt" });
             /*ProductionOn.Add(new Item(now, now.AddMinutes(20)));
             ProductionOff.Add(new ProductionDuration(now.AddMinutes(20), now.AddMinutes(40)));
             ProductionOn.Add(new ProductionDuration(now.AddMinutes(40), end));*/
